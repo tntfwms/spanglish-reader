@@ -86,7 +86,9 @@ details {
   
   /* Modal Content */
   .modal-content {
-    background-color: #fefefe;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
