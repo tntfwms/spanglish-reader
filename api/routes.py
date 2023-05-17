@@ -14,8 +14,14 @@ def generate_id() -> str:
 
 ResType = Response | FileResponse
 
+def response(data: dict, status: int, headers: dict[str, str]) -> Response:
+    headers['Access-Control-Allow-Origin'] = f'https://{config.gh_name}.github.io' if config.custom_domain is None else config.custom_domain
+    return Response(
+        body=dump_json(data), status=status, headers=headers
+    )
+
 async def upload_api_page(res: Request) -> ResType:
-    log.info(f"Received request from {res.host} to {res.method} {res.path}")
+    log.info(f"Received request from {res.remote} to {res.method} {res.path}")
 
     try:
         data = await res.json()
@@ -39,7 +45,7 @@ async def upload_api_page(res: Request) -> ResType:
     }
     data = {
         'message' : f"Upload Spanglish From Page",
-        "content" : base64.b64encode(final.encode('utf-8'))
+        "content" : base64.b64encode(final.encode('utf-8')).decode()
     }
     async with res.app['client_session'].get(url, headers=headers, json=data) as response:
         return_data = await response.text()

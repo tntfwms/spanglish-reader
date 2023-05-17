@@ -8,7 +8,7 @@ with open("header.html", "r") as f:
     HEADER = f.read()
 
 def generate_html(body: str, data: dict) -> str:
-    assets_url = "/assets" if config.custom_domain is True else f"/{config.gh_repo}/assets"
+    assets_url = "/assets" if config.custom_domain is not None else f"/{config.gh_repo}/assets"
     return f"""
     <html>
         <head>
