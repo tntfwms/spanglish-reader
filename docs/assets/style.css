@@ -1,0 +1,94 @@
+body,.default,details > summary {
+    background-color: rgb(38, 36, 36);
+    color: white;
+}
+.spanish-word {
+    cursor: pointer;
+}
+.spanish-word:hover {
+    text-decoration: underline;
+}
+
+header > span {
+    background-color: black;
+    color: white;
+    float: right;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.button {
+    padding: 10px;
+    border-radius: 10px;
+}
+.button:hover {
+    box-shadow: 5px 10px 8px #444444;
+}
+.button.save, .button.green {
+    background-color: green;
+    width: 20%;
+    color: white;
+}
+.button.save {
+    float: right;
+}
+.button.red {
+    background-color: red;
+    color: white;
+    width: 20%;
+}
+a {
+    text-decoration: none;
+    color: lightblue;
+}
+a:hover {
+    text-decoration: underline;
+}
+a.incognito {
+    color: inherit;
+    text-decoration: none;
+}
+.center {
+    margin: auto;
+    text-align: center;
+    position: relative;
+}
+code {
+    background-color: #000000;
+    color: white;
+}
+details {
+    background-color: rgb(21, 21, 21);
+    color: white;
+}
+.float-right {
+    float: right;
+}
+.title {
+    font-weight: bold;
+    font-size: 35px;
+}
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
