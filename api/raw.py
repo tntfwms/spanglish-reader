@@ -2,9 +2,28 @@ import requests
 from bs4 import BeautifulSoup
 import bs4
 import html
+import config
 
 with open("header.html", "r") as f:
     HEADER = f.read()
+
+def generate_html(body: str, data: dict) -> str:
+    assets_url = "/assets" if config.custom_domain is True else f"/{config.gh_repo}/assets"
+    return f"""
+    <html>
+        <head>
+            <link rel="stylesheet" href="{assets_url}/style.css">
+            <script src="{assets_url}/script.js"></script>
+        </head>
+        {HEADER}
+        <body>
+            {body}
+        </body>
+        <script>
+            const data = {data}
+        </script>
+    </html>
+    """
 
 
 def _render(word: str, data: dict) -> str:
@@ -40,21 +59,7 @@ def render_all(txt: str) -> str:
             done.append(word)
 
     txt = "<br>\n".join(txt.splitlines())
-    return f"""
-    <html>
-        <head>
-            <link rel="stylesheet" href="/assets/style.css">
-            <script src="/assets/script.js"></script>
-        </head>
-        {HEADER}
-        <body>
-            {txt}
-        </body>
-        <script>
-            const data = {data}
-        </script>
-    </html>
-    """
+    return generate_html(txt, data)
 
 
 def render_syntax(txt: str) -> str:
@@ -85,21 +90,7 @@ def render_syntax(txt: str) -> str:
                 inside = True
 
     txt = "<br>\n".join(txt.splitlines())
-    return f"""
-    <html>
-        <head>
-            <link rel="stylesheet" href="/assets/style.css">
-            <script src="/assets/script.js"></script>
-        </head>
-        {HEADER}
-        <body>
-            {txt}
-        </body>
-        <script>
-            const data = {data}
-        </script>
-    </html>
-    """
+    return generate_html(txt, data)
 
 def render(txt: str) -> str:
     txt = html.escape(txt)
