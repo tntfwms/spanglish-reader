@@ -5,24 +5,26 @@ from aiohttp import ClientSession
 
 from .routes import upload_api_page
 import config
+from .logs import setup_logging
+setup_logging()
 
 logger = getLogger('App Factory')
 
 async def client_session_ctx(app: web.Application) -> AsyncIterator:
-    logger.debug('Creating ClientSession')
+    logger.info('Creating ClientSession')
     app['client_session'] = ClientSession()
 
     yield
 
-    logger.debug('Closing ClientSession')
+    logger.info('Closing ClientSession')
     await app['client_session'].close()
 
 
 async def app_factory() -> web.Application:
-    logger.debug('Creating Application (entering APP Factory)')
+    logger.info('Creating Application (entering APP Factory)')
     app = web.Application()
 
-    logger.debug('Adding Routes')
+    logger.info('Adding Routes')
     app.add_routes(
         [
             web.post('/api/v1/upload', upload_api_page),
@@ -30,10 +32,10 @@ async def app_factory() -> web.Application:
     )
 
 
-    logger.debug('Registering Cleanup contexts')
+    logger.info('Registering Cleanup contexts')
     app.cleanup_ctx.append(client_session_ctx)
 
-    logger.debug('APP is now prepared and can be returned by APP Factory')
+    logger.info('APP is now prepared and can be returned by APP Factory')
     return app
 
 

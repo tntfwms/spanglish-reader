@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import bs4
 import html
 
-with open("assets/header.html", "r") as f:
+with open("header.html", "r") as f:
     HEADER = f.read()
 
 
