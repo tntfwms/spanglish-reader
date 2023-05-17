@@ -45,7 +45,7 @@
             if (data.success === false){
                 alert(data.error);
             } else {
-                const url = `${window.location.origin}/read/${data.id}`;
+                const url = `${window.location.href.split("/upload")[0]}/read/${data.id}`;
                 const modal = document.getElementById('modal');
                 const successUrl = document.getElementById('success-url');
                 

@@ -42,13 +42,18 @@ async def upload_api_page(res: Request) -> ResType:
 
     url = f"https://api.github.com/repos/{config.gh_name}/{config.gh_repo}/contents/docs/read/{id}.html"
     headers = {
-        'accept' : 'application/vnd.github+json' 
+        'accept' : 'application/vnd.github+json',
+        "Authentication" : f"Bearer {config.gh_token}"
     }
     data = {
         'message' : f"Upload Spanglish From Page",
-        "content" : base64.b64encode(final.encode('utf-8')).decode()
+        "content" : base64.b64encode(final.encode('utf-8')).decode(),
+        "author" : {
+            "name" : f"{res.remote}",
+            "email" : config.gh_email
+        }
     }
-    async with res.app['client_session'].get(url, headers=headers, json=data) as response:
+    async with res.app['client_session'].put(url, headers=headers, json=data) as response:
         return_data = await response.text()
         print(return_data)
     
