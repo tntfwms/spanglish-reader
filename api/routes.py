@@ -48,7 +48,7 @@ async def upload_api_page(res: Request) -> ResType:
     data = {
         'message' : f"Upload Spanglish From Page",
         "content" : base64.b64encode(final.encode('utf-8')).decode(),
-        "author" : {
+        "committer" : {
             "name" : f"{res.remote}",
             "email" : config.gh_email
         }
@@ -56,5 +56,6 @@ async def upload_api_page(res: Request) -> ResType:
     async with res.app['client_session'].put(url, headers=headers, json=data) as response:
         return_data = await response.text()
         print(return_data)
+        print(url)
     
     return Resp({'success' : True, 'id' : id}, status=201)
