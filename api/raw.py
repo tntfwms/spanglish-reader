@@ -44,6 +44,15 @@ def _render(word: str, data: dict) -> str:
                 "url": url,
             }
             return txt
+    
+    if " " in word:
+        return " ".join(
+            [
+                _render(w, data)
+                for w in word.split(" ")
+            ]
+        )
+
     return word
 
 
