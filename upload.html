@@ -37,7 +37,13 @@
 			const txt = el.value;
 
             console.log("Making request to api...");
-            const res = await fetch(`http://127.0.0.1:80/api/v1/upload`, {body: JSON.stringify({"text": txt}), method: "POST"})
+            const res = await fetch(`http://127.0.0.1:80/api/v1/upload`, {
+                body: JSON.stringify({"text": txt}),
+                method: "POST"
+            }).catch((error) => {
+                alert('I could not connect to my API. Please try again later.');
+                return
+            });
             const data = await res.json()
             console.log(`Received ${data}`);
             
