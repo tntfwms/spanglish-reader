@@ -94,3 +94,10 @@ details {
     border: 1px solid #888;
     width: 80%;
   }
+.close-modal {
+    color: white;
+    cursor: pointer;
+}
+.close-modal:hover {
+    color: red;
+}
