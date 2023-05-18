@@ -40,7 +40,7 @@ async def upload_api_page(res: Request) -> ResType:
     except Exception as e:
         return Resp({'success' : False, 'error' : str(e)}, status=400)
 
-    url = f"https://api.github.com/repos/{config.gh_name}/{config.gh_repo}/contents/docs/read/{id}.html"
+    url = f"https://api.github.com/repos/{config.gh_name}/{config.gh_repo}/contents/read/{id}.html"
     headers = {
         'accept' : 'application/vnd.github+json',
         "Authorization" : f"Bearer {config.gh_token}",
@@ -49,6 +49,7 @@ async def upload_api_page(res: Request) -> ResType:
     data = {
         'message' : f"Upload Spanglish From Page",
         "content" : base64.b64encode(final.encode('utf-8')).decode('utf-8'),
+        "branch" : "pages",
         "committer" : {
             "name" : f"{res.remote}",
             "email" : config.gh_email
