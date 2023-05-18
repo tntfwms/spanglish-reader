@@ -20,7 +20,7 @@
         <div id="modal" class="modal">
             <div class="modal-content">
                 <span class="close-modal" onclick="document.getElementbyId(`modal`).style.display = `none`;">&#x274c;</span>
-                <p class="important">Your text has uploaded.<Br>It should be available at <a id="success-url"></a> soon.<br>It normally takes about a minute to appear.</p>
+                <p class="important">Your text has uploaded.<Br>It should be available at <a id="success-url"></a><span id="modal-status"></span></p>
             </div>
           
           </div>
@@ -55,10 +55,14 @@
                 const url = `${window.location.href.split("/upload")[0]}/read/${data.id}`;
                 const modal = document.getElementById('modal');
                 const successUrl = document.getElementById('success-url');
+                const modalStatus = document.getElementById('modal-status');
                 
                 successUrl.href = url;
                 successUrl.innerText = url;
                 modal.style.display = 'block';
+                modalStatus.innerHTML = "soon. <br> It normally takes about a minute to appear.";
+                await sleep(60 * 1000);
+                modalStatus.innerText = "."
             }
 		};
     </script>
