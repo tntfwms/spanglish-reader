@@ -152,3 +152,7 @@ function startLoading() {
       let loadingDiv = document.getElementById('loading-screen');
       document.body.removeChild(loadingDiv);
   }
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
