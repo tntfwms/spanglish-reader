@@ -97,6 +97,7 @@ details {
 .close-modal {
     color: white;
     cursor: pointer;
+    float: right;
 }
 .close-modal:hover {
     color: red;
