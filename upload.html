@@ -43,6 +43,7 @@
                 method: "POST"
             }).catch((error) => {
                 alert('I could not connect to my API. Please try again later.');
+                stopLoading();
                 return
             });
             const data = await res.json()
