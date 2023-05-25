@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import bs4
 import html
 import config
+from .translator import translate, TranslateError
 
 with open("header.html", "r") as f:
     HEADER = f.read()
@@ -46,12 +47,21 @@ def _render(word: str, data: dict) -> str:
             return txt
     
     if " " in word:
-        return " ".join(
-            [
-                _render(w, data)
-                for w in word.split(" ")
-            ]
-        )
+        try:
+            after = translate(word)
+        except (RuntimeError, TranslateError):
+            pass
+        else:
+            x = word.replace("`", "\\`")
+            txt = f'<span class="spanish-word" onclick="showSpanishWord(`{x}`)">{word}</span>'
+            data[word] = {
+                "def_url": "",
+                "text": after.translated,
+                "url": url,
+            }
+            return txt
+
+        
 
     return word
 
